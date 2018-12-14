@@ -23,14 +23,14 @@ The Sensything basic kit is put together to work **out of the box**, which means
 
 If you have purchased the *Sensything - board only* version then you will have to bring your own battery, and cables.
 
-<iframe width="640" height="564" src="https://player.vimeo.com/video/306374413" frameborder="0" allowFullScreen mozallowfullscreen webkitAllowFullScreen></iframe>
 
 Test
 
 ### Power it up
 
 This video throws light on how to set up your Sensything device.
-Video:Power it up
+
+
 
 ### Install the Sensything app for Android
 
@@ -46,6 +46,70 @@ Video: Using the App
 A sensor is a measure of the changes that occur in the physical environment, or it's your chance to interface with the physical world. It collects this data and provides an analog voltage as an output.The output range usually varies from 0 to 5 volts, for most of them.
 
 Some basic examples of how to connect to Analog sensors
+##Experiments
+
+##Alcohol detector
+
+##Aim: To determine the level of Alcohol in any liquid
+
+##Application:
+
+Since this sensor has a good level of sensitivity it can be used a portable alcohol detector.
+
+
+           ## Procedure:
+		Setting up: Image
+
+				
+Video: Alcohol sensor working
+Excerpts from the code:
+
+```c
+float adc_data = (float)((bit32*VFSR*1000)/FSR);     //In  mV
+float v = (adc_data/10) * (5.0/1024.0);
+float mgL = 0.67 * v;
+channel1 = (float) mgL;
+printf("channel1 : %f \n",channel1);
+
+if(mgL > 0.8)
+{    printf("mg/L : %f \n",mgL); 
+     printf(" Alcohol Detected");  }
+else
+{    printf("mg/L : %f \n",mgL); 
+     printf(" Normal - No Alcohol found");
+   }  
+ 
+```
+
+## Water level check
+
+## Aim: To determine the level of any liquid
+
+## Application:
+It can determine the continuous liquid level monitoring of water, non corrosive water or dry fluids.
+
+## Procedure:
+		Setting up: Image
+
+	
+Video: Water level sensor working
+
+The eTape Liquid Level Sensor is a solid-state sensor with a resistive output that varies with the level of the fluid. It does away with clunky mechanical floats, and easily interfaces with electronic control systems. The eTape sensor's envelope is compressed by the hydrostatic pressure of the fluid in which it is immersed. This results in a change in resistance that corresponds to the distance from the top of the sensor to the surface of the fluid. The sensor's resistive output is inversely proportional to the height of the liquid: the lower the liquid level, the higher the output resistance; the higher the liquid level, the lower the output resistance.
+Here we can calculate the output resistance from converting the adc data in sensything. Below we measure the etape liquid level sensor output resistance.
+
+```c
+float adc_data = (float)((bit32*VFSR*1000)/FSR);     //In  mV
+float sensor_volt = adc_data/1024*5.0;
+
+Serial.print("sensor_volt = ");
+
+Video: Water Level
+```
+
+
+
+
+
 
 # Using Sensything with Arduino
 
